@@ -28,6 +28,24 @@ export class AddMateComponent implements OnInit {
   }
 
   addMate(): void {
-    // this.markAsDirty(this.mateForm);
+    this.mateService.saveMate(this.mateForm.value);
+    this.markAsDirty(this.mateForm);
+  }
+
+  openDialog(): void {
+    // console.log(this.wasFormChanged);
+  }
+
+  private markAsDirty(group: FormGroup): void {
+    group.markAsDirty();
+
+    // tslint:disable-next-line: forin
+    for (const i in group.controls) {
+      group.controls[i].markAsDirty();
+    }
+  }
+
+  onSubmit(): void {
+
   }
 }

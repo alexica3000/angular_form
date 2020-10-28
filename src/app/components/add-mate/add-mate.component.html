@@ -22,7 +22,7 @@
         <mat-grid-tile>
           <div class="text-inside">
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Age" formControlName="age">
+              <input matInput placeholder="Age" type="number" formControlName="age">
             </mat-form-field>
           </div>
         </mat-grid-tile>
@@ -49,9 +49,11 @@
                 <mat-option value="0">Male</mat-option>
                 <mat-option value="1">Female</mat-option>
               </mat-select>
-              <mat-hint>Errors appear instantly!</mat-hint>
+              <mat-hint>Gender: M/F</mat-hint>
               <mat-error *ngIf="mateForm.controls.gender.hasError('required')">You must make a selection</mat-error>
-              <mat-error *ngIf="mateForm.controls.gender.hasError('pattern')">
+              <mat-error
+                *ngIf="mateForm.controls.gender.hasError('pattern')
+                  && !mateForm.controls.gender.hasError('required')">
                 Your selection is invalid
               </mat-error>
             </mat-form-field>

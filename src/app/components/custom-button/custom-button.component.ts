@@ -18,7 +18,8 @@ export class CustomButtonComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openDialog(model: Mate): void {
+  openDialog(): void {
+    const model = new Mate();
     const dialogRef = this.dialog.open(AddMateComponent, {
       width: '700px',
       disableClose: true,

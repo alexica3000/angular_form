@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import {MateService} from '../../services/mate.service';
 
@@ -27,25 +27,22 @@ export class AddMateComponent implements OnInit {
     });
   }
 
-  addMate(): void {
-    this.mateService.saveMate(this.mateForm.value);
-    this.markAsDirty(this.mateForm);
-  }
-
-  openDialog(): void {
-    // console.log(this.wasFormChanged);
-  }
-
   private markAsDirty(group: FormGroup): void {
     group.markAsDirty();
 
-    // tslint:disable-next-line: forin
+    // tslint:disable-next-line:forin
     for (const i in group.controls) {
       group.controls[i].markAsDirty();
     }
   }
 
   onSubmit(): void {
+    if (this.mateForm.invalid) {
+      this.markAsDirty(this.mateForm);
+      return;
+    }
 
+    this.mateService.saveMate(this.mateForm.value);
+    this.dialog.closeAll();
   }
 }
